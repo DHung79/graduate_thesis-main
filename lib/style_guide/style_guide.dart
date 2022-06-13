@@ -73,7 +73,11 @@ class IconName {
 }
 
 //Call Icon
-Widget icon(String string, Color? color, double size) {
+Widget icon({
+  required String string,
+  Color? color,
+  double size = 24,
+}) {
   return SvgPicture.asset(
     string,
     color: color,
@@ -82,7 +86,10 @@ Widget icon(String string, Color? color, double size) {
   );
 }
 
-Widget sticker(String string, double size) {
+Widget sticker({
+  required String string,
+  double size = 24,
+}) {
   return SvgPicture.asset(
     string,
     width: size,
@@ -92,10 +99,19 @@ Widget sticker(String string, double size) {
 
 //Typography
 
-Text input(String string, FontWeight fontWeight, Color color, double fontSize) {
+Text input(
+  String string,
+  FontWeight fontWeight,
+  Color color,
+  double fontSize,
+) {
   return Text(
     string,
-    style: TextStyle(fontWeight: fontWeight, color: color, fontSize: fontSize),
+    style: TextStyle(
+      fontWeight: fontWeight,
+      color: color,
+      fontSize: fontSize,
+    ),
   );
 }
 
@@ -109,7 +125,8 @@ class Shadow {
 
 BoxShadow shadow(double blurRadius, double opacity) {
   return BoxShadow(
-      color: ColorGuide().shadow.withOpacity(opacity),
-      blurRadius: blurRadius,
-      blurStyle: BlurStyle.normal);
+    color: ColorGuide().shadow.withOpacity(opacity),
+    blurRadius: blurRadius,
+    blurStyle: BlurStyle.normal,
+  );
 }

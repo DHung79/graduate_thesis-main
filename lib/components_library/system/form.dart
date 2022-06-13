@@ -6,7 +6,13 @@ class AppForm extends StatefulWidget {
   final Color colorIcon;
   final Color focusedTextColor;
   final int buttonStyle;
-  const AppForm({Key? key}) : super(key: key);
+  const AppForm({
+    Key? key,
+    required this.iconName,
+    required this.colorIcon,
+    required this.focusedTextColor,
+    required this.buttonStyle,
+  }) : super(key: key);
   @override
   State<AppForm> createState() => AppFormState();
 }
@@ -15,13 +21,16 @@ class AppFormState extends State<AppForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: ColorGuide().text2,fontFamily: 'PlusJakartaSans',fontWeight: FontWeight.w700),
+      style: TextStyle(
+          color: ColorGuide().text2,
+          fontFamily: 'PlusJakartaSans',
+          fontWeight: FontWeight.w700),
       decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorGuide().shade6, width: 2)),
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorGuide().primary1, width: 2)),
-          prefixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24),
+          prefixIconConstraints: const BoxConstraints(minHeight: 24, minWidth: 24),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: icon(IconName().user, ColorGuide().primary1, 24),

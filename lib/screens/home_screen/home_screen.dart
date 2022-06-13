@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/components_library/system/bottom_navigation_bar.dart';
-import 'package:graduate_thesis/screen/Homepage/category.dart';
-import 'package:graduate_thesis/screen/Homepage/header.dart';
-import 'package:graduate_thesis/screen/Homepage/recent.dart';
 import 'package:graduate_thesis/style_guide/style_guide.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+import 'category.dart';
+import 'header.dart';
+import 'recent.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/style_guide/style_guide.dart';
 
+import '../../themes/app_icons.dart';
+
 class CategoryFeature extends StatelessWidget {
   const CategoryFeature({Key? key}) : super(key: key);
 
@@ -27,14 +29,38 @@ class CategoryFeature extends StatelessWidget {
               child: Wrap(
                 runSpacing: 16,
                 children: [
-                  categoryItem("Social Media",
-                      sticker(StickerName().socialMedia, 40), screenWidth),
                   categoryItem(
-                      "Games", sticker(StickerName().games, 40), screenWidth),
+                    "Social Media",
+                    AppIcon(
+                      AppIcons.socialMedia,
+                      size: 40,
+                    ),
+                    screenWidth,
+                  ),
                   categoryItem(
-                      "Work", sticker(StickerName().works, 40), screenWidth),
+                    "Games",
+                    AppIcon(
+                      AppIcons.games,
+                      size: 40,
+                    ),
+                    screenWidth,
+                  ),
                   categoryItem(
-                      "Others", sticker(StickerName().others, 40), screenWidth),
+                    "Work",
+                    AppIcon(
+                      AppIcons.works,
+                      size: 40,
+                    ),
+                    screenWidth,
+                  ),
+                  categoryItem(
+                    "Others",
+                    AppIcon(
+                      AppIcons.others,
+                      size: 40,
+                    ),
+                    screenWidth,
+                  ),
                 ],
               ),
             ),

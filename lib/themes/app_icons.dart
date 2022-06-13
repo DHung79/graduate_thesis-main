@@ -6,7 +6,7 @@ class AppIconData {
   AppIconData({required this.path});
 }
 
-class SvgIcons {
+class AppIcons {
   static AppIconData home = AppIconData(
     path: "assets/icons/fi-rr-home.svg",
   );
@@ -109,7 +109,7 @@ class AppIcon extends StatelessWidget {
   const AppIcon(
     this.icon, {
     Key? key,
-    this.size,
+    this.size = 24,
     this.color,
     this.semanticLabel,
   }) : super(key: key);

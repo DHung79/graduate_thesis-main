@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/components_library/system/buttons.dart';
+import 'package:graduate_thesis/themes/app_colors.dart';
+import 'package:graduate_thesis/themes/app_icons.dart';
 
 import '../../style_guide/style_guide.dart';
 
@@ -82,7 +84,10 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
           },
           child: Row(
             children: [
-              sticker(logoName, 32),
+              AppIcon(
+                AppIcons.google,
+                size: 32,
+              ),
               SizedBox(
                 width: 16,
               ),
@@ -194,10 +199,14 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                           Container(
                             width: 32,
                             height: 32,
-                            child: sticker(StickerName().facebook, 32),
+                            child: AppIcon(
+                              AppIcons.facebook,
+                              size: 32,
+                            ),
                           ),
                           SizedBox(width: 16),
-                          input("Facebook", FontWeight.w700, ColorGuide().text1, 16)
+                          input("Facebook", FontWeight.w700, ColorGuide().text1,
+                              16)
                         ],
                       ),
                       SizedBox(
@@ -209,8 +218,8 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                           Row(
                             children: [
                               Expanded(
-                                  child: input("vinhkygm@gmail.com", FontWeight.w500,
-                                      ColorGuide().text1, 14)),
+                                  child: input("vinhkygm@gmail.com",
+                                      FontWeight.w500, ColorGuide().text1, 14)),
                               SizedBox(
                                 width: 16,
                               ),
@@ -222,8 +231,10 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                                       child: Container(
                                         width: 24,
                                         height: 24,
-                                        child: icon(IconName().copy,
-                                            ColorGuide().primary4, 24),
+                                        child: AppIcon(
+                                          AppIcons.copy,
+                                          color: AppColor.primary4,
+                                        ),
                                       )),
                                   onTap: () {
                                     setState(() {
@@ -252,8 +263,10 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                                       child: Container(
                                         width: 24,
                                         height: 24,
-                                        child: icon(IconName().copy,
-                                            ColorGuide().primary4, 24),
+                                        child: AppIcon(
+                                          AppIcons.copy,
+                                          color: AppColor.primary4,
+                                        ),
                                       )),
                                   onTap: () {
                                     setState(() {

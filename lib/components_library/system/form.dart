@@ -33,7 +33,7 @@ class AppFormState extends State<AppForm> {
           prefixIconConstraints: const BoxConstraints(minHeight: 24, minWidth: 24),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: icon(IconName().user, ColorGuide().primary1, 24),
+            // child: icon(IconName().user, ColorGuide().primary1, 24),
           )),
       validator: (value) {
         if (value == null || value.isEmpty) {

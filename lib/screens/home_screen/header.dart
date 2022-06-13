@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
-
+import 'package:graduate_thesis/themes/app_colors.dart';
 import '../../style_guide/style_guide.dart';
+import '../../themes/app_icons.dart';
 
 class HeaderHomePage extends StatefulWidget {
   final String? searchText;
@@ -58,7 +57,9 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                         SizedBox(
                           width: 10,
                         ),
-                        sticker(StickerName().wallet, 24)
+                        AppIcon(
+                          AppIcons.wallet,
+                        ),
                       ]),
                     ),
                   )
@@ -85,7 +86,10 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: EdgeInsets.all(10),
                   child: Row(children: [
-                    icon(IconName().search, ColorGuide().primary4, 24),
+                    AppIcon(
+                      AppIcons.search,
+                      color: AppColor.primary4,
+                    ),
                     SizedBox(
                       width: 16,
                     ),

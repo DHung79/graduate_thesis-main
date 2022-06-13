@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/style_guide/style_guide.dart';
+import 'package:graduate_thesis/themes/app_colors.dart';
+import 'package:graduate_thesis/themes/app_icons.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
   const AppBottomNavigationBar({Key? key}) : super(key: key);
@@ -54,9 +56,10 @@ class _BottomNavigationBarState extends State<AppBottomNavigationBar> {
             SizedBox(
               height: 20,
             ),
-            (index == selectedPage)
-                ? icon(logo, ColorGuide().primary1, 24)
-                : icon(logo, ColorGuide().text5, 24)
+            AppIcon(
+              AppIcons.lock,
+              color: index == selectedPage ? AppColor.primary1 : AppColor.text5,
+            ),
           ]),
         ));
   }

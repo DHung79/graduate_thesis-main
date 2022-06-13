@@ -9,7 +9,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w500,
       color: color,
       fontSize: 24,
-      height: 30.24,
     );
   }
 
@@ -19,7 +18,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 24,
-      height: 30.24,
     );
   }
 
@@ -29,7 +27,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w700,
       color: color,
       fontSize: 16,
-      height: 20.16,
     );
   }
 
@@ -39,7 +36,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w500,
       color: color,
       fontSize: 16,
-      height: 20.16,
     );
   }
 
@@ -49,7 +45,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 16,
-      height: 20.16,
     );
   }
 
@@ -59,7 +54,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w700,
       color: color,
       fontSize: 14,
-      height: 17.64,
     );
   }
 
@@ -69,7 +63,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w500,
       color: color,
       fontSize: 14,
-      height: 17.64,
     );
   }
 
@@ -79,7 +72,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 14,
-      height: 17.64,
     );
   }
 
@@ -89,7 +81,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 14,
-      height: 17.64,
       decoration: TextDecoration.underline,
     );
   }
@@ -100,7 +91,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 14,
-      height: 17.64,
       fontFeatures: const [
         FontFeature.enable('sups'),
       ],
@@ -113,7 +103,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 12,
-      height: 15.12,
     );
   }
 
@@ -123,7 +112,6 @@ class AppTextStyle {
       fontWeight: FontWeight.w400,
       color: color,
       fontSize: 10,
-      height: 12.6,
     );
   }
 }

@@ -126,7 +126,7 @@ class _AppIconButtonState extends State<AppIconButton> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: isIconLeft == true
                   ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      icon(iconName, iconColor, iconSize),
+                      // icon(iconName, iconColor, iconSize),
                       SizedBox(
                         width: 16,
                       ),
@@ -139,7 +139,7 @@ class _AppIconButtonState extends State<AppIconButton> {
                         SizedBox(
                           width: 16,
                         ),
-                        icon(iconName, iconColor, iconSize),
+                        // icon(iconName, iconColor, iconSize),
                       ],
                     ),
             )));

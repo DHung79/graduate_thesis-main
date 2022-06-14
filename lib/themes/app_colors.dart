@@ -28,6 +28,9 @@ class AppColor {
   static Color successful3 = hexToColor('#B6D96A');
   static Color failed = hexToColor('#F6416C');
   static Color warning = hexToColor('#FFDE7D');
+  static Color white = Colors.white;
+  static Color black = Colors.black;
+  static Color transparent = Colors.transparent;
 }
 
 Color hexToColor(String hex) {

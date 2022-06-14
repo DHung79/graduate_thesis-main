@@ -31,6 +31,9 @@ class AppIcons {
   static AppIconData user = AppIconData(
     path: "assets/icons/account_circle_full.svg",
   );
+  static AppIconData lock = AppIconData(
+    path: "assets/icons/lock.svg",
+  );
   static AppIconData email = AppIconData(
     path: "assets/icons/alternate_email.svg",
   );
@@ -94,7 +97,7 @@ class AppIcons {
   static AppIconData others = AppIconData(
     path: "assets/icons/other.svg",
   );
-  static AppIconData lock = AppIconData(
+  static AppIconData lockSticker = AppIconData(
     path: "assets/icons/padlock.svg",
   );
   static AppIconData wallet = AppIconData(

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "499223212544",
+    "project_id": "graduate-thesis-fd0ba",
+    "storage_bucket": "graduate-thesis-fd0ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499223212544:android:cce5b60b0d1b98485b1ee5",
+        "android_client_info": {
+          "package_name": "com.graduate.thesis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499223212544-c813o97oh6lncfldhg74i2e7e0rk56lv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSQqdfFAGvi5b1bojFxad74DNJ45FM7vI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499223212544-c813o97oh6lncfldhg74i2e7e0rk56lv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "499223212544-su6e32jlgvniqtc3i4jhm1lieqesi20v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.graduate.thesis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,7 +15,7 @@ class CategoryFeature extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: input("Category", FontWeight.w700, ColorGuide().primary1, 16),
+          child: input('Category', FontWeight.w700, ColorGuide().primary1, 16),
         ),
         SizedBox(
           height: 16,
@@ -30,7 +30,7 @@ class CategoryFeature extends StatelessWidget {
                 runSpacing: 16,
                 children: [
                   categoryItem(
-                    "Social Media",
+                    'Social Media',
                     AppIcon(
                       AppIcons.socialMedia,
                       size: 40,
@@ -38,7 +38,7 @@ class CategoryFeature extends StatelessWidget {
                     screenWidth,
                   ),
                   categoryItem(
-                    "Games",
+                    'Games',
                     AppIcon(
                       AppIcons.games,
                       size: 40,
@@ -46,7 +46,7 @@ class CategoryFeature extends StatelessWidget {
                     screenWidth,
                   ),
                   categoryItem(
-                    "Work",
+                    'Work',
                     AppIcon(
                       AppIcons.works,
                       size: 40,
@@ -54,7 +54,7 @@ class CategoryFeature extends StatelessWidget {
                     screenWidth,
                   ),
                   categoryItem(
-                    "Others",
+                    'Others',
                     AppIcon(
                       AppIcons.others,
                       size: 40,

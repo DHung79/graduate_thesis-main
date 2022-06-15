@@ -31,32 +31,32 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          input("Recent", FontWeight.w700, ColorGuide().primary1, 16),
+          input('Recent', FontWeight.w700, ColorGuide().primary1, 16),
           SizedBox(
             height: 16,
           ),
-          recentAccountItem(StickerName().facebook, "Facebook",
-              "vinhkygm@gmail.com", "**********"),
+          recentAccountItem(StickerName().facebook, 'Facebook',
+              'vinhkygm@gmail.com', '**********'),
           SizedBox(
             height: 16,
           ),
-          recentAccountItem(StickerName().google, "Google",
-              "vinhkygm@gmail.com", "**********"),
+          recentAccountItem(StickerName().google, 'Google',
+              'vinhkygm@gmail.com', '**********'),
           SizedBox(
             height: 16,
           ),
-          recentAccountItem(StickerName().google, "Google",
-              "vinhkygm@gmail.com", "**********"),
+          recentAccountItem(StickerName().google, 'Google',
+              'vinhkygm@gmail.com', '**********'),
           SizedBox(
             height: 16,
           ),
-          recentAccountItem(StickerName().google, "Google",
-              "vinhkygm@gmail.com", "**********"),
+          recentAccountItem(StickerName().google, 'Google',
+              'vinhkygm@gmail.com', '**********'),
           SizedBox(
             height: 16,
           ),
-          recentAccountItem(StickerName().google, "Google",
-              "vinhkygm@gmail.com", "**********"),
+          recentAccountItem(StickerName().google, 'Google',
+              'vinhkygm@gmail.com', '**********'),
           SizedBox(
             height: 16,
           ),
@@ -65,7 +65,7 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                   height: 44,
                   alignment: Alignment.centerLeft,
                   child: input(
-                      "Show more", FontWeight.w700, ColorGuide().text1, 14)),
+                      'Show more', FontWeight.w700, ColorGuide().text1, 14)),
               onTap: () {})
         ],
       ),
@@ -164,7 +164,7 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: input("Account Information", FontWeight.w700,
+                            child: input('Account Information', FontWeight.w700,
                                 ColorGuide().text1, 16),
                           ),
                           GestureDetector(
@@ -205,7 +205,7 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                             ),
                           ),
                           SizedBox(width: 16),
-                          input("Facebook", FontWeight.w700, ColorGuide().text1,
+                          input('Facebook', FontWeight.w700, ColorGuide().text1,
                               16)
                         ],
                       ),
@@ -218,7 +218,7 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                           Row(
                             children: [
                               Expanded(
-                                  child: input("vinhkygm@gmail.com",
+                                  child: input('vinhkygm@gmail.com',
                                       FontWeight.w500, ColorGuide().text1, 14)),
                               SizedBox(
                                 width: 16,
@@ -249,7 +249,7 @@ class _RecentAccountFeatureState extends State<RecentAccountFeature> {
                           Row(
                             children: [
                               Expanded(
-                                child: input("**************", FontWeight.w500,
+                                child: input('**************', FontWeight.w500,
                                     ColorGuide().text1, 14),
                               ),
                               SizedBox(

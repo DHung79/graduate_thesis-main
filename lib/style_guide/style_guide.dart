@@ -34,42 +34,42 @@ class ColorGuide {
 
 //Sticker Store
 class StickerName {
-  String google = "assets/icons/google.svg";
-  String youtube = "assets/icons/youtube.svg";
-  String spotify = "assets/icons/spotify.svg";
-  String facebook = "assets/icons/facebook.svg";
-  String instagram = "assets/icons/instagram.svg";
-  String socialMedia = "assets/icons/social-media.svg";
-  String games = "assets/icons/controller.svg";
-  String works = "assets/icons/suitcase.svg";
-  String others = "assets/icons/other.svg";
-  String lock = "assets/icons/padlock.svg";
-  String wallet = "assets/icons/purse.svg";
-  String blankSearch = "assets/icons/search.svg";
+  String google = 'assets/icons/google.svg';
+  String youtube = 'assets/icons/youtube.svg';
+  String spotify = 'assets/icons/spotify.svg';
+  String facebook = 'assets/icons/facebook.svg';
+  String instagram = 'assets/icons/instagram.svg';
+  String socialMedia = 'assets/icons/social-media.svg';
+  String games = 'assets/icons/controller.svg';
+  String works = 'assets/icons/suitcase.svg';
+  String others = 'assets/icons/other.svg';
+  String lock = 'assets/icons/padlock.svg';
+  String wallet = 'assets/icons/purse.svg';
+  String blankSearch = 'assets/icons/search.svg';
 }
 
 //Icon Store
 class IconName {
-  String home = "assets/icons/fi-rr-home.svg";
-  String settings = "assets/icons/setting-1881213.svg";
-  String add = "assets/icons/circle-add.svg";
-  String copy = "assets/icons/documents.svg";
-  String search = "assets/icons/search-1.svg";
-  String random = "assets/icons/random-(1).svg";
-  String back = "assets/icons/keyboard_backspace.svg";
+  String home = 'assets/icons/fi-rr-home.svg';
+  String settings = 'assets/icons/setting-1881213.svg';
+  String add = 'assets/icons/circle-add.svg';
+  String copy = 'assets/icons/documents.svg';
+  String search = 'assets/icons/search-1.svg';
+  String random = 'assets/icons/random-(1).svg';
+  String back = 'assets/icons/keyboard_backspace.svg';
   String user = 'assets/icons/account_circle_full.svg';
   String email = 'assets/icons/alternate_email.svg';
   String backIOS = 'assets/icons/arrow_back_ios.svg';
-  String back2 = "assets/icons/arrow_back.svg";
-  String forward = "assets/icons/arrow_forward.svg";
-  String checkRec = "assets/icons/check_box_black_24dp 1.svg";
-  String checkRec2 = "assets/icons/check_box_outline_blank_black_24dp 1.svg";
-  String checkCir = "assets/icons/circle-check.svg";
-  String checkCir2 = "assets/icons/circle-check-fill.svg";
-  String close = "assets/icons/close.svg";
-  String expanded = "assets/icons/expand_more.svg";
-  String eyeOff = "assets/icons/Eye_off.svg";
-  String eye = "assets/icons/Eye.svg";
+  String back2 = 'assets/icons/arrow_back.svg';
+  String forward = 'assets/icons/arrow_forward.svg';
+  String checkRec = 'assets/icons/check_box_black_24dp 1.svg';
+  String checkRec2 = 'assets/icons/check_box_outline_blank_black_24dp 1.svg';
+  String checkCir = 'assets/icons/circle-check.svg';
+  String checkCir2 = 'assets/icons/circle-check-fill.svg';
+  String close = 'assets/icons/close.svg';
+  String expanded = 'assets/icons/expand_more.svg';
+  String eyeOff = 'assets/icons/Eye_off.svg';
+  String eye = 'assets/icons/Eye.svg';
 }
 
 //Call Icon

@@ -5,6 +5,8 @@ import 'package:graduate_thesis/style_guide/style_guide.dart';
 import 'package:graduate_thesis/themes/app_colors.dart';
 import 'package:graduate_thesis/themes/app_icons.dart';
 
+import '../../main.dart';
+
 class AppBottomNavigationBar extends StatefulWidget {
   const AppBottomNavigationBar({Key? key}) : super(key: key);
 
@@ -35,7 +37,7 @@ class _BottomNavigationBarState extends State<AppBottomNavigationBar> {
         onTap: () {
           setState(() {
             selectedPage = index;
-            Navigator.of(context).pushNamed(pageRoute);
+            navigatorTo(context, pageRoute);
           });
         },
         child: Container(

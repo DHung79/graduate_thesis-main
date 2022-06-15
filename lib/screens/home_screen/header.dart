@@ -34,7 +34,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                 children: [
                   Expanded(
                     child: Text(
-                      "PM",
+                      'PM',
                       style: TextStyle(
                           color: ColorGuide().primary1,
                           fontSize: 40,
@@ -52,7 +52,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: ColorGuide().primary4)),
                       child: Row(children: [
-                        input("Your vault", FontWeight.w700,
+                        input('Your vault', FontWeight.w700,
                             ColorGuide().primary4, 14),
                         SizedBox(
                           width: 10,
@@ -97,7 +97,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                         child: TextFormField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Type account name",
+                        hintText: 'Type account name',
                         hintStyle:
                             TextStyle(color: ColorGuide().text5, fontSize: 14),
                       ),

@@ -17,6 +17,9 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: ColorGuide().shade4,
       bottomNavigationBar: AppBottomNavigationBar(),
       body: Stack(children: [
+        HeaderHomePage(
+          searchText: searchText,
+        ),
         ListView(
           children: [
             SizedBox(
@@ -38,9 +41,6 @@ class HomeScreen extends StatelessWidget {
               height: 300,
             )
           ],
-        ),
-        HeaderHomePage(
-          searchText: searchText,
         ),
       ]),
     );

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:graduate_thesis/core/logger/logger.dart';
 import 'package:graduate_thesis/main.dart';
 import 'package:graduate_thesis/routes/route_names.dart';
 import 'package:graduate_thesis/themes/theme.dart';
@@ -204,9 +205,10 @@ class _SignInScreenState extends State<SignInScreen> {
       // FirebaseAuth.instance.currentUser.reauthenticateWithCredential(credential)
       FirebaseAuth.instance
           .signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      )
+            email: _emailController.text,
+            password: _passwordController.text,
+          )
+          .then((value) => currentUserId = value.user!.uid)
           .catchError(
         (error, stackTrace) {
           setState(() {

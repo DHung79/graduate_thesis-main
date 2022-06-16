@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:graduate_thesis/core/logger/logger.dart';
 import 'package:graduate_thesis/main.dart';
 import 'package:graduate_thesis/routes/route_names.dart';
 import 'package:graduate_thesis/themes/theme.dart';
@@ -259,7 +261,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       email: _emailController.text,
       password: _passwordController.text,
     )
-        .catchError(
+        .then((value) {
+      FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set(
+        {
+          'email': _emailController.text,
+          'password': _passwordController.text,
+        },
+      );
+    }).catchError(
       (error, stackTrace) {
         setState(() {
           _errorMessage = error.toString();

@@ -133,3 +133,8 @@ class AppIcon extends StatelessWidget {
     );
   }
 }
+
+class AppImages {
+  static String wellcome = "assets/images/wellcome.png";
+  static String splash = "assets/images/splash.png";
+}

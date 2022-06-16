@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'routes/route_names.dart';
 
 Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-
+String currentUserId = '';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -13,7 +13,7 @@ void main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'PlusJakartaSans'),
-      initialRoute: signInRoute,
+      initialRoute: wellcomeRoute,
       onGenerateRoute: RouteGenerator.generateRoute,
     ),
   );

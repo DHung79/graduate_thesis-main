@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/style_guide/style_guide.dart';
 import 'package:graduate_thesis/themes/app_colors.dart';
 import 'package:graduate_thesis/themes/app_icons.dart';
-
 import '../../main.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {

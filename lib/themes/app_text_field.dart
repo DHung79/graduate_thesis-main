@@ -114,4 +114,38 @@ class AppTextField {
       onFieldSubmitted: onFieldSubmitted,
     );
   }
+
+  static Widget prefixIconField({
+    TextEditingController? controller,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters,
+    Function(String?)? onSaved,
+    Function(String)? onChanged,
+    String? Function(String?)? validator,
+    String? hintText,
+    Function(String)? onFieldSubmitted,
+    required Widget prefixIcon,
+  }) {
+    return TextFormField(
+      style: AppTextStyle.boldBodyText(AppColor.text2),
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
+      decoration: InputDecoration(
+        prefixIconConstraints: const BoxConstraints(
+          maxHeight: 24,
+          maxWidth: 40,
+        ),
+        isCollapsed: true,
+        prefixIcon: prefixIcon,
+        border: InputBorder.none,
+        hintText: hintText,
+        hintStyle: AppTextStyle.normalText(AppColor.text5),
+      ),
+      controller: controller,
+      onSaved: onSaved,
+      onChanged: onChanged,
+      validator: validator,
+      onFieldSubmitted: onFieldSubmitted,
+    );
+  }
 }

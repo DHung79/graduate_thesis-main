@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/core/logger/logger.dart';
 import 'package:graduate_thesis/main.dart';
 import 'package:graduate_thesis/routes/route_names.dart';
 import 'package:graduate_thesis/themes/theme.dart';
@@ -25,164 +24,169 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _errorMessage = '';
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        splashColor: AppColor.transparent,
-                        highlightColor: AppColor.transparent,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Center(
-                                child: AppIcon(
-                                  AppIcons.backIOS,
-                                  color: AppColor.black,
-                                  size: 24,
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: SafeArea(
+          child: Container(
+            height: screenSize.height,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          splashColor: AppColor.transparent,
+                          highlightColor: AppColor.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Center(
+                                  child: AppIcon(
+                                    AppIcons.backIOS,
+                                    color: AppColor.black,
+                                    size: 24,
+                                  ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Text(
+                                    'Sign in',
+                                    style: AppTextStyle.boldBodyText(
+                                        AppColor.black),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            navigatorTo(context, signInRoute);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 56, 32, 63),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            isEmail ? 'Sign up' : 'Almost done!',
+                            style: TextStyle(
+                              fontFamily: 'PlusJakartaSans',
+                              fontWeight: FontWeight.w800,
+                              color: AppColor.primary1,
+                              fontSize: 32,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          isEmail
+                              ? 'Feel free to register your account accessing all of our services.'
+                              : 'Enter your  password to complete the process.',
+                          style: AppTextStyle.mediumBodyText(AppColor.text2),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    key: _key,
+                    autovalidateMode: _autovalidate,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (isEmail)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 24),
+                            child: Container(
+                              constraints: const BoxConstraints(minHeight: 56),
+                              child: AppTextField.textField(
+                                controller: _emailController,
+                                hintText: 'Enter your email',
+                                icon: AppIcons.email,
+                                onSaved: (value) {
+                                  _emailController.text = value!.trim();
+                                },
+                                onChanged: (value) {
+                                  setState(() {
+                                    _errorMessage = '';
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value!.trim().isEmpty) {
+                                    return 'Email must not be empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        if (!isEmail) _buildPassword(),
+                        if (_errorMessage.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 24),
+                            child: Text(
+                              _errorMessage,
+                              style: AppTextStyle.normalText(
+                                AppColor.primary5,
+                              ),
+                            ),
+                          ),
+                        AppButton.defaultButton(
+                          color: AppColor.primary1,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppIcon(
+                                AppIcons.checkCir,
+                                color: AppColor.white,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8),
+                                padding: const EdgeInsets.only(left: 12),
                                 child: Text(
-                                  'Sign in',
-                                  style:
-                                      AppTextStyle.boldBodyText(AppColor.black),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          navigatorTo(context, signInRoute);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 56, 32, 63),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          isEmail ? 'Sign up' : 'Almost done!',
-                          style: TextStyle(
-                            fontFamily: 'PlusJakartaSans',
-                            fontWeight: FontWeight.w800,
-                            color: AppColor.primary1,
-                            fontSize: 32,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        isEmail
-                            ? 'Feel free to register your account accessing all of our services.'
-                            : 'Enter your  password to complete the process.',
-                        style: AppTextStyle.mediumBodyText(AppColor.text2),
-                      ),
-                    ],
-                  ),
-                ),
-                Form(
-                  key: _key,
-                  autovalidateMode: _autovalidate,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (isEmail)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Container(
-                            constraints: const BoxConstraints(minHeight: 56),
-                            child: AppTextField.textField(
-                              controller: _emailController,
-                              hintText: 'Enter your email',
-                              icon: AppIcons.email,
-                              onSaved: (value) {
-                                _emailController.text = value!.trim();
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _errorMessage = '';
-                                });
-                              },
-                              validator: (value) {
-                                if (value!.trim().isEmpty) {
-                                  return 'Email must not be empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                      if (!isEmail) _buildPassword(),
-                      if (_errorMessage.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Text(
-                            _errorMessage,
-                            style: AppTextStyle.normalText(
-                              AppColor.primary5,
-                            ),
-                          ),
-                        ),
-                      AppButton.defaultButton(
-                        color: AppColor.primary1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AppIcon(
-                              AppIcons.checkCir,
-                              color: AppColor.white,
-                              size: 24,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Text(
-                                isEmail ? 'Next' : 'Complete!',
-                                style: AppTextStyle.headerTitle(
-                                  AppColor.white,
+                                  isEmail ? 'Next' : 'Complete!',
+                                  style: AppTextStyle.headerTitle(
+                                    AppColor.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        onPressed: () {
-                          if (_key.currentState!.validate()) {
-                            _key.currentState!.save();
-                            if (isEmail) {
-                              setState(() {
-                                isEmail = false;
-                              });
+                            ],
+                          ),
+                          onPressed: () {
+                            if (_key.currentState!.validate()) {
+                              _key.currentState!.save();
+                              if (isEmail) {
+                                setState(() {
+                                  isEmail = false;
+                                });
+                              } else {
+                                _signUp();
+                              }
                             } else {
-                              _signUp();
+                              setState(() {
+                                _autovalidate =
+                                    AutovalidateMode.onUserInteraction;
+                              });
                             }
-                          } else {
-                            setState(() {
-                              _autovalidate =
-                                  AutovalidateMode.onUserInteraction;
-                            });
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                          },
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:graduate_thesis/core/logger/logger.dart';
 import 'package:graduate_thesis/main.dart';
 import 'package:graduate_thesis/routes/route_names.dart';
 import 'package:graduate_thesis/themes/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -22,36 +23,65 @@ class _SignInScreenState extends State<SignInScreen> {
   String _errorMessage = '';
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'PM',
-                  style: TextStyle(
-                    fontFamily: 'Mogena',
-                    fontSize: 128,
-                    color: AppColor.primary1,
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            child: SizedBox(
+              height: screenSize.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'PM',
+                    style: TextStyle(
+                      fontFamily: 'Mogena',
+                      fontSize: 128,
+                      color: AppColor.primary1,
+                    ),
                   ),
-                ),
-                Form(
-                  key: _key,
-                  autovalidateMode: _autovalidate,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 24),
-                        child: AppTextField.textField(
-                          controller: _emailController,
-                          hintText: 'Email',
-                          icon: AppIcons.user,
+                  Form(
+                    key: _key,
+                    autovalidateMode: _autovalidate,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: AppTextField.textField(
+                            controller: _emailController,
+                            hintText: 'Email',
+                            icon: AppIcons.user,
+                            onSaved: (value) {
+                              _emailController.text = value!.trim();
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                _errorMessage = '';
+                              });
+                            },
+                            validator: (value) {
+                              if (value!.trim().isEmpty) {
+                                return 'Email must not be empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        AppTextField.passwordField(
+                          controller: _passwordController,
+                          hintText: 'Password',
+                          obscureText: _passwordSecure,
+                          passwordIconOnPressed: () {
+                            setState(() {
+                              _passwordSecure = !_passwordSecure;
+                            });
+                          },
                           onSaved: (value) {
-                            _emailController.text = value!.trim();
+                            _passwordController.text = value!.trim();
                           },
                           onChanged: (value) {
                             setState(() {
@@ -60,84 +90,60 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                           validator: (value) {
                             if (value!.trim().isEmpty) {
-                              return 'Email must not be empty';
+                              return 'Password must not be empty';
+                            }
+                            if (value.trim().length < 6) {
+                              return 'Password must have at least 6 characters.';
                             }
                             return null;
                           },
                         ),
-                      ),
-                      AppTextField.passwordField(
-                        controller: _passwordController,
-                        hintText: 'Password',
-                        obscureText: _passwordSecure,
-                        passwordIconOnPressed: () {
-                          setState(() {
-                            _passwordSecure = !_passwordSecure;
-                          });
-                        },
-                        onSaved: (value) {
-                          _passwordController.text = value!.trim();
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            _errorMessage = '';
-                          });
-                        },
-                        validator: (value) {
-                          if (value!.trim().isEmpty) {
-                            return 'Password must not be empty';
-                          }
-                          if (value.trim().length < 6) {
-                            return 'Password must have at least 6 characters.';
-                          }
-                          return null;
-                        },
-                      ),
-                      _actionsField(),
-                      AppButton.defaultButton(
-                        color: AppColor.primary1,
-                        child: Text(
-                          'Sign in',
-                          style: AppTextStyle.headerTitle(
-                            AppColor.white,
+                        _actionsField(),
+                        AppButton.defaultButton(
+                          color: AppColor.primary1,
+                          child: Text(
+                            'Sign in',
+                            style: AppTextStyle.headerTitle(
+                              AppColor.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            _signIn();
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Don’t have an account yet?',
+                                style: AppTextStyle.normalText(
+                                  AppColor.black,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16),
+                                child: InkWell(
+                                  child: Text(
+                                    'Sign up',
+                                    style: AppTextStyle.headerTitle(
+                                      AppColor.primary1,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    navigatorTo(context, signUpRoute);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        onPressed: () {
-                          _signIn();
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Don’t have an account yet?',
-                              style: AppTextStyle.normalText(
-                                AppColor.black,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: InkWell(
-                                child: Text(
-                                  'Sign up',
-                                  style: AppTextStyle.headerTitle(
-                                    AppColor.primary1,
-                                  ),
-                                ),
-                                onTap: () {
-                                  navigatorTo(context, signUpRoute);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -201,15 +207,21 @@ class _SignInScreenState extends State<SignInScreen> {
   _signIn() async {
     if (_key.currentState!.validate()) {
       _key.currentState!.save();
+
       // EmailAuthProvider.credential(email: email, password: password)
       // FirebaseAuth.instance.currentUser.reauthenticateWithCredential(credential)
       FirebaseAuth.instance
           .signInWithEmailAndPassword(
-            email: _emailController.text,
-            password: _passwordController.text,
-          )
-          .then((value) => currentUserId = value.user!.uid)
-          .catchError(
+        email: _emailController.text,
+        password: _passwordController.text,
+      )
+          .then((value) async {
+        if (_isKeepSession) {
+          SharedPreferences sharedPreferences = await prefs;
+          sharedPreferences.setString('currentUserId', value.user!.uid);
+        }
+        currentUserId = value.user!.uid;
+      }).catchError(
         (error, stackTrace) {
           setState(() {
             _errorMessage = error.toString();

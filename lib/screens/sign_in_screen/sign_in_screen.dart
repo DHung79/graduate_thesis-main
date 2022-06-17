@@ -99,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                         ),
                         _actionsField(),
-                        AppButton.defaultButton(
+                        AppButton.roundedButton(
                           color: AppColor.primary1,
                           child: Text(
                             'Sign in',
@@ -125,6 +125,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 16),
                                 child: InkWell(
+                                  splashColor: AppColor.transparent,
+                                  highlightColor: AppColor.transparent,
                                   child: Text(
                                     'Sign up',
                                     style: AppTextStyle.headerTitle(
@@ -192,6 +194,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ],
           ),
           // InkWell(
+          //   splashColor: AppColor.transparent,
+          //   highlightColor: AppColor.transparent,
           //   child: Text(
           //     'Forgot Password?',
           //     style: AppTextStyle.mediumBodyText(

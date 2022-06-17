@@ -143,7 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-                        AppButton.defaultButton(
+                        AppButton.roundedButton(
                           color: AppColor.primary1,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

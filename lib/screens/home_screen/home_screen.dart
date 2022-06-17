@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:graduate_thesis/core/logger/logger.dart';
+import 'package:graduate_thesis/screens/home_screen/components/account_info_dialog.dart';
+import '../../core/models/account_model.dart';
+import '../layout_template/page_template.dart';
 import '/themes/jt_indicator.dart';
-import '/core/models/account_model.dart';
 import '/core/models/user_model.dart';
 import '/main.dart';
 import '/themes/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -17,12 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
   double statusBarHeight = 0;
   final collection = FirebaseFirestore.instance.collection('users');
   final _searchController = TextEditingController();
+  bool showAll = false;
   @override
   Widget build(BuildContext context) {
     statusBarHeight = MediaQuery.of(context).viewPadding.top;
-    return Scaffold(
-      backgroundColor: AppColor.shade4,
-      body: StreamBuilder(
+
+    return PageTemplate(
+      child: StreamBuilder(
           stream: collection.doc(currentUserId).snapshots(),
           builder: (context,
               AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
@@ -42,18 +45,95 @@ class _HomeScreenState extends State<HomeScreen> {
               //   userData.accounts.add(newAccount);
               // }
               // data.reference.update(userData.toJson());
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _buildHeader(userData),
-                    _buildCategory(userData),
-                  ],
-                ),
+              return Column(
+                children: [
+                  _buildHeader(userData),
+                  if (_searchController.text.isEmpty)
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          _buildContent(userData),
+                          _addButton(userData),
+                        ],
+                      ),
+                    ),
+                ],
               );
             } else {
               return const JTIndicator();
             }
           }),
+    );
+  }
+
+  Widget _addButton(UserModel user) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 16, 39),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: AppColor.primary1,
+                ),
+                constraints: const BoxConstraints(
+                  maxWidth: 136,
+                  minHeight: 44,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        'Add New',
+                        style: AppTextStyle.headerTitle(
+                          AppColor.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 44,
+                      width: 44,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(4),
+                        ),
+                        color: AppColor.primary2,
+                      ),
+                      child: Center(
+                        child: AppIcon(
+                          AppIcons.add,
+                          color: AppColor.white,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContent(UserModel user) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildCategory(user),
+          _buildRecent(user),
+          _buildSocialMedia(user),
+        ],
+      ),
     );
   }
 
@@ -131,7 +211,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     hintText: 'Type account name...',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _searchController.text = value;
+                        _searchController.selection =
+                            TextSelection.collapsed(offset: value.length);
+                      });
+                    },
                     onSaved: (value) {},
                   ),
                 ),
@@ -185,6 +271,216 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildRecent(UserModel user) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColor.text3,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [AppBoxShadow.light1],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  'Recent',
+                  style: AppTextStyle.headerTitle(AppColor.primary1),
+                ),
+              ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: showAll ? user.accounts.length : 2,
+                  itemBuilder: (context, index) {
+                    final account = user.accounts[index];
+                    return _recentAccountItem(account);
+                  }),
+              if (!showAll && user.accounts.length > 2)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: InkWell(
+                    splashColor: AppColor.transparent,
+                    highlightColor: AppColor.transparent,
+                    child: Container(
+                      height: 44,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Show more',
+                        style: AppTextStyle.boldBodyText(AppColor.text2),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        showAll = true;
+                      });
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildSocialMedia(UserModel user) {
+    final screenSize = MediaQuery.of(context).size;
+    final socialMedias = [
+      'Facebook',
+      'Youtube',
+      'Google',
+      'Instagram',
+      'Spotify',
+    ];
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColor.text3,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [AppBoxShadow.light1],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  'Social Media',
+                  style: AppTextStyle.headerTitle(AppColor.primary1),
+                ),
+              ),
+              SizedBox(
+                height: 96,
+                width: screenSize.width - 64,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.horizontal,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      final socialMedia = socialMedias[index];
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 24, 0),
+                        child: Container(
+                          constraints: const BoxConstraints(minWidth: 80),
+                          child: Column(
+                            children: [
+                              AppIcon(
+                                getIcon(socialMedia),
+                                size: 48,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  socialMedia,
+                                  style: AppTextStyle.mediumBodyText(
+                                    AppColor.text1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _recentAccountItem(AccountModel account) {
+    bool passwordSecure = true;
+    return LayoutBuilder(builder: (context, size) {
+      return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+        final title = account.type[0].toUpperCase() + account.type.substring(1);
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              onPressed: () {
+                showDialog(
+                    barrierDismissible: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AccountInfoDialog(
+                        account: account,
+                        title: title,
+                      );
+                    });
+              },
+              child: Row(
+                children: [
+                  AppIcon(
+                    getIcon(account.type),
+                    size: 32,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: AppTextStyle.mediumBodyText(AppColor.primary1),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Text(
+                            account.email,
+                            style: AppTextStyle.normalText(AppColor.text1),
+                          ),
+                        ),
+                        Container(
+                          width: size.maxWidth - 110,
+                          constraints: const BoxConstraints(minHeight: 14),
+                          child: AppTextField.passwordReadOnly(
+                            initialValue: account.password,
+                            obscureText: passwordSecure,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              splashColor: AppColor.transparent,
+              highlightColor: AppColor.transparent,
+              onTap: () {
+                setState(() {
+                  passwordSecure = !passwordSecure;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppIcon(
+                  AppIcons.eye,
+                  size: 24,
+                  color: AppColor.text5,
+                ),
+              ),
+            )
+          ],
+        );
+      });
+    });
   }
 
   Widget _categoryItem({

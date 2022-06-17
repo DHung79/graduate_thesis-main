@@ -108,6 +108,23 @@ class AppIcons {
   );
 }
 
+AppIconData getIcon(String type) {
+  switch (type.trim().toLowerCase()) {
+    case 'google':
+      return AppIcons.google;
+    case 'youtube':
+      return AppIcons.youtube;
+    case 'spotify':
+      return AppIcons.spotify;
+    case 'facebook':
+      return AppIcons.facebook;
+    case 'instagram':
+      return AppIcons.instagram;
+    default:
+      return AppIcons.lockSticker;
+  }
+}
+
 class AppIcon extends StatelessWidget {
   const AppIcon(
     this.icon, {

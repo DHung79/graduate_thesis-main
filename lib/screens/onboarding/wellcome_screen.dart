@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graduate_thesis/main.dart';
-import 'package:graduate_thesis/routes/route_names.dart';
 import 'package:graduate_thesis/themes/theme.dart';
 
 class WellcomeScreen extends StatefulWidget {
@@ -51,6 +50,8 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 44),
                         child: InkWell(
+                          splashColor: AppColor.transparent,
+                          highlightColor: AppColor.transparent,
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: Text(

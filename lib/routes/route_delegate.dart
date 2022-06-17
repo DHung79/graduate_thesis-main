@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduate_thesis/routes/route_names.dart';
 import '../screens/generate_password/generate_password_homepage.dart';
 import '../screens/home_screen/home_screen.dart';
+import '../screens/not_found/page_not_found_screen.dart';
 import '../screens/onboarding/splash_screen.dart';
 import '../screens/onboarding/wellcome_screen.dart';
 import '../screens/sign_in_screen/sign_in_screen.dart';
@@ -12,26 +13,29 @@ class RouteGenerator {
     String routePath = path.name ?? '';
     Widget _screenFor(String route) {
       if (route == wellcomeRoute) {
-        return WellcomeScreen();
+        return const WellcomeScreen();
       }
       if (route == splashRoute) {
-        return SplashScreen();
+        return const SplashScreen();
       }
       if (route == homeRoute) {
-        return HomeScreen();
+        return const HomeScreen();
       }
       if (route == generatePasswordRoute) {
-        return GeneratePasswordScreen();
+        return const GeneratePasswordScreen();
       }
       if (route == signInRoute) {
-        return SignInScreen();
+        return const SignInScreen();
       }
       if (route == signUpRoute) {
-        return SignUpScreen();
+        return const SignUpScreen();
       }
-      return Container();
+      return PageNotFoundScreen(route);
     }
 
-    return MaterialPageRoute(builder: (_) => _screenFor(routePath));
+    return MaterialPageRoute(
+      builder: (_) => _screenFor(routePath),
+      settings: path,
+    );
   }
 }

@@ -74,7 +74,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 45, 16, 89),
-                    child: AppButton.defaultButton(
+                    child: AppButton.roundedButton(
                         color: AppColor.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

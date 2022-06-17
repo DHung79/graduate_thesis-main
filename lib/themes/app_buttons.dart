@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppButton {
-  static Widget defaultButton({
+  static Widget roundedButton({
     required Widget child,
     void Function()? onPressed,
     Color? color,
@@ -18,30 +18,6 @@ class AppButton {
         style: TextButton.styleFrom(
           backgroundColor: color,
           primary: highlightColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: borderRadius,
-          ),
-        ),
-        onPressed: onPressed,
-        child: child,
-      ),
-    );
-  }
-
-  static Widget appIconButton({
-    required Widget child,
-    void Function()? onPressed,
-    Color? color,
-    Color? highlightColor,
-    BorderRadiusGeometry borderRadius = BorderRadius.zero,
-    BoxConstraints? constraints,
-  }) {
-    return Container(
-      constraints: constraints,
-      child: TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: color,
-          primary: highlightColor ?? Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius,
           ),

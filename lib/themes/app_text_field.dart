@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graduate_thesis/core/logger/logger.dart';
 import 'package:graduate_thesis/themes/theme.dart';
 
 class AppTextField {
@@ -146,6 +147,27 @@ class AppTextField {
       onChanged: onChanged,
       validator: validator,
       onFieldSubmitted: onFieldSubmitted,
+    );
+  }
+
+  static Widget passwordReadOnly({
+    required bool obscureText,
+    required String initialValue,
+    Color? color,
+  }) {
+    return TextFormField(
+      readOnly: true,
+      style: AppTextStyle.normalText(AppColor.text1),
+      obscureText: obscureText,
+      initialValue: initialValue,
+      scrollPadding: EdgeInsets.zero,
+      decoration: const InputDecoration(
+        constraints: BoxConstraints(minHeight: 14, minWidth: 100),
+        contentPadding: EdgeInsets.zero,
+        isDense: true,
+        isCollapsed: true,
+        border: InputBorder.none,
+      ),
     );
   }
 }

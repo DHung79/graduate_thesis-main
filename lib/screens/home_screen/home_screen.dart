@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:graduate_thesis/screens/home_screen/components/social_media.dart';
 import '/screens/home_screen/components/account_info_dialog.dart';
 import '../../core/models/account_model.dart';
 import '../../widgets/jt_indicator.dart';
@@ -49,7 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: Stack(
                       children: [
-                        _buildContent(userData),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 80),
+                          child: _buildContent(userData),
+                        ),
                         if (keyboardVisible == 0) _addButton(userData),
                       ],
                     ),
@@ -129,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             _buildCategory(user),
             _buildRecent(user),
-            _buildSocialMedia(user),
+            SocialMedia(user: user),
           ],
         ),
       );
@@ -180,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0,47,0,23),
+                padding: const EdgeInsets.fromLTRB(0, 47, 0, 23),
                 child: Image.asset(
                   AppImages.search,
                   width: 100,
@@ -304,31 +308,33 @@ class _HomeScreenState extends State<HomeScreen> {
               style: AppTextStyle.headerTitle(AppColor.primary1),
             ),
           ),
-          Wrap(
-            spacing: 41,
-            runSpacing: 18,
-            children: [
-              _categoryItem(
-                name: 'Social Media',
-                icon: AppIcons.socialMedia,
-                onTap: () {},
-              ),
-              _categoryItem(
-                name: 'Entertainments',
-                icon: AppIcons.games,
-                onTap: () {},
-              ),
-              _categoryItem(
-                name: 'Work',
-                icon: AppIcons.works,
-                onTap: () {},
-              ),
-              _categoryItem(
-                name: 'Others',
-                icon: AppIcons.others,
-                onTap: () {},
-              ),
-            ],
+          Center(
+            child: Wrap(
+              spacing: 41,
+              runSpacing: 18,
+              children: [
+                _categoryItem(
+                  name: 'Social Media',
+                  icon: AppIcons.socialMedia,
+                  onTap: () {},
+                ),
+                _categoryItem(
+                  name: 'Entertainments',
+                  icon: AppIcons.games,
+                  onTap: () {},
+                ),
+                _categoryItem(
+                  name: 'Work',
+                  icon: AppIcons.works,
+                  onTap: () {},
+                ),
+                _categoryItem(
+                  name: 'Others',
+                  icon: AppIcons.others,
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -387,78 +393,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  _buildSocialMedia(UserModel user) {
-    final screenSize = MediaQuery.of(context).size;
-    final socialMedias = [
-      'Facebook',
-      'Youtube',
-      'Google',
-      'Instagram',
-      'Spotify',
-    ];
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColor.text3,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [AppBoxShadow.light1],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  'Social Media',
-                  style: AppTextStyle.headerTitle(AppColor.primary1),
-                ),
-              ),
-              SizedBox(
-                height: 96,
-                width: screenSize.width - 64,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.horizontal,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      final socialMedia = socialMedias[index];
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 24, 0),
-                        child: Container(
-                          constraints: const BoxConstraints(minWidth: 80),
-                          child: Column(
-                            children: [
-                              AppIcon(
-                                getIcon(socialMedia),
-                                size: 48,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Text(
-                                  socialMedia,
-                                  style: AppTextStyle.mediumBodyText(
-                                    AppColor.text1,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-              ),
             ],
           ),
         ),

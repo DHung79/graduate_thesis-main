@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../themes/theme.dart';
 
 class JTToast {
@@ -8,11 +7,12 @@ class JTToast {
     FToast().init(context);
   }
 
-  static void successToast({
+  static void successToast(
+    BuildContext context, {
     required String message,
-    double width = 308,
-    double height = 72,
+    double height = 92,
   }) {
+    final screenSize = MediaQuery.of(context).size;
     FToast().showToast(
       gravity: ToastGravity.BOTTOM,
       toastDuration: const Duration(seconds: 2),
@@ -27,37 +27,61 @@ class JTToast {
       //   );
       // },
       child: Container(
-        width: width,
+        width: screenSize.width - 32,
         height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: AppColor.white,
-          boxShadow: [
-            BoxShadow(
-              color: AppColor.shadow.withOpacity(0.2),
-              spreadRadius: 3,
-              blurRadius: 8,
-              offset: const Offset(0, 0),
-            ),
-          ],
+          boxShadow: [AppBoxShadow.light1],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(
-              Icons.check_circle_sharp,
-              color: AppColor.shade5,
-              size: 26,
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Container(
+                width: 12,
+                height: height,
+                decoration: BoxDecoration(
+                  color: AppColor.primary1,
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Đã sao chép tài khoản',
+                  style: AppTextStyle.headerTitle(AppColor.primary1),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    'Hãy truy cập ứng dụng tương ứng để dán dữ liệu',
+                    style: AppTextStyle.mediumBodyText(AppColor.text1),
+                  ),
+                ),
+              ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 13),
-              child: Text(
-                message,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppColor.text1,
-                ),
+              padding: const EdgeInsets.all(16),
+              child: Container(
+                height: height - 32,
+                width: 1,
+                color: AppColor.shade3,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+              child: AppIcon(
+                AppIcons.close,
+                color: AppColor.text1,
+                size: 24,
               ),
             ),
           ],

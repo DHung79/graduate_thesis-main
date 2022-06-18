@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/core/logger/logger.dart';
-import 'package:graduate_thesis/main.dart';
-import 'package:graduate_thesis/routes/route_names.dart';
-import 'package:graduate_thesis/themes/theme.dart';
+import '/main.dart';
+import '/themes/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -99,6 +97,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                         ),
                         _actionsField(),
+                        if (_errorMessage.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24),
+                            child: Text(
+                              _errorMessage,
+                              style: AppTextStyle.normalText(AppColor.primary5),
+                            ),
+                          ),
                         AppButton.roundedButton(
                           color: AppColor.primary1,
                           child: Text(
@@ -211,7 +217,6 @@ class _SignInScreenState extends State<SignInScreen> {
   _signIn() async {
     if (_key.currentState!.validate()) {
       _key.currentState!.save();
-
       // EmailAuthProvider.credential(email: email, password: password)
       // FirebaseAuth.instance.currentUser.reauthenticateWithCredential(credential)
       FirebaseAuth.instance

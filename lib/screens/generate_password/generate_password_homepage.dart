@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/style_guide/style_guide.dart';
-
+import '../../themes/theme.dart';
 import '../../main.dart';
 
 class GeneratePasswordScreen extends StatelessWidget {
@@ -10,8 +9,10 @@ class GeneratePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageTemplate(
       child: Center(
-        child: input(
-            'This is page 2', FontWeight.w700, ColorGuide().primary1, 100),
+        child: Text(
+          'This is page 2',
+          style: AppTextStyle.bigText(AppColor.primary1),
+        ),
       ),
     );
   }

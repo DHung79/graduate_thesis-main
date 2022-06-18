@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '/widgets/jt_toast.dart';
 import '../../main.dart';
 import '../../themes/theme.dart';
 
@@ -18,15 +19,16 @@ class _PageTemplateState extends State<PageTemplate> {
   final collection = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
+    JTToast.init(context);
     return Scaffold(
       backgroundColor: AppColor.shade4,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(child: widget.child),
-          _buildBottomNavigator(),
         ],
       ),
+      bottomNavigationBar: _buildBottomNavigator(),
     );
   }
 

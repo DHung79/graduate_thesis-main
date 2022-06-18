@@ -1,4 +1,4 @@
-import 'package:graduate_thesis/core/models/account_model.dart';
+import '/core/models/account_model.dart';
 
 class UserModel {
   String email;

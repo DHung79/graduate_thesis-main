@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/core/logger/logger.dart';
-import 'package:graduate_thesis/screens/home_screen/components/account_info_dialog.dart';
+import '/screens/home_screen/components/account_info_dialog.dart';
 import '../../core/models/account_model.dart';
-import '../layout_template/page_template.dart';
-import '/themes/jt_indicator.dart';
+import '../../widgets/jt_indicator.dart';
 import '/core/models/user_model.dart';
 import '/main.dart';
 import '/themes/theme.dart';
@@ -23,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     statusBarHeight = MediaQuery.of(context).viewPadding.top;
-
+    final keyboardVisible = MediaQuery.of(context).viewInsets.bottom;
     return PageTemplate(
       child: StreamBuilder(
           stream: collection.doc(currentUserId).snapshots(),
@@ -48,15 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
               return Column(
                 children: [
                   _buildHeader(userData),
-                  if (_searchController.text.isEmpty)
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          _buildContent(userData),
-                          _addButton(userData),
-                        ],
-                      ),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        _buildContent(userData),
+                        if (keyboardVisible == 0) _addButton(userData),
+                      ],
                     ),
+                  ),
                 ],
               );
             } else {
@@ -126,15 +123,80 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildContent(UserModel user) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildCategory(user),
-          _buildRecent(user),
-          _buildSocialMedia(user),
-        ],
-      ),
-    );
+    if (_searchController.text.isEmpty) {
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildCategory(user),
+            _buildRecent(user),
+            _buildSocialMedia(user),
+          ],
+        ),
+      );
+    } else {
+      final searchResults = user.accounts
+          .where((e) => e.email.contains(_searchController.text))
+          .toList();
+      if (searchResults.isNotEmpty) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 19, 0, 14),
+                child: Text(
+                  'Found ${searchResults.length} accounts',
+                  style: AppTextStyle.mediumBodyText(AppColor.primary1),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: searchResults.length,
+                itemBuilder: (context, index) {
+                  final account = searchResults[index];
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: _recentAccountItem(account),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0,47,0,23),
+                child: Image.asset(
+                  AppImages.search,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Text(
+                'Sorry, we can’t found it.',
+                style: AppTextStyle.normalText(AppColor.text5),
+              ),
+            ],
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildHeader(UserModel user) {
@@ -295,14 +357,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: showAll ? user.accounts.length : 2,
-                  itemBuilder: (context, index) {
-                    final account = user.accounts[index];
-                    return _recentAccountItem(account);
-                  }),
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: showAll ? user.accounts.length : 2,
+                itemBuilder: (context, index) {
+                  final account = user.accounts[index];
+                  return _recentAccountItem(account);
+                },
+              ),
               if (!showAll && user.accounts.length > 2)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),

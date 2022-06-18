@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:graduate_thesis/core/logger/logger.dart';
-import 'package:graduate_thesis/themes/theme.dart';
+import '/themes/theme.dart';
 
 class AppTextField {
   static Widget textField({

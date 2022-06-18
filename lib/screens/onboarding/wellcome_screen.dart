@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/main.dart';
-import 'package:graduate_thesis/themes/theme.dart';
+import '/main.dart';
+import '/themes/theme.dart';
 
 class WellcomeScreen extends StatefulWidget {
   const WellcomeScreen({Key? key}) : super(key: key);

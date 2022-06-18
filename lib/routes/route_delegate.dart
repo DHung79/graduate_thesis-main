@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/routes/route_names.dart';
+import '/routes/route_names.dart';
 import '../screens/generate_password/generate_password_homepage.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/not_found/page_not_found_screen.dart';
@@ -7,7 +7,6 @@ import '../screens/onboarding/splash_screen.dart';
 import '../screens/onboarding/wellcome_screen.dart';
 import '../screens/sign_in_screen/sign_in_screen.dart';
 import '../screens/sign_up_screen/sign_up_screen.dart';
-
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings path) {
     String routePath = path.name ?? '';
@@ -33,9 +32,10 @@ class RouteGenerator {
       return PageNotFoundScreen(route);
     }
 
-    return MaterialPageRoute(
-      builder: (_) => _screenFor(routePath),
+    return PageRouteBuilder(
+      pageBuilder: (_, __, ___) => _screenFor(routePath),
       settings: path,
+      transitionDuration: const Duration(seconds: 0),
     );
   }
 }

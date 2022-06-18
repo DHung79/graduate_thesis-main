@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'routes/route_names.dart';
 export 'routes/route_names.dart';
 export './screens/layout_template/page_template.dart';
+export './core/logger/logger.dart';
 
 Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 String currentUserId = '';

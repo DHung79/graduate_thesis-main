@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduate_thesis/themes/app_colors.dart';
+import '/themes/app_colors.dart';
 
 class AppBoxShadow {
   static BoxShadow light1 = shadow(16, 0.16);
